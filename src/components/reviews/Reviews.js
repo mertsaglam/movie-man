@@ -12,7 +12,6 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
     let params = useParams();
     const movieId = params.movieId;
     
-
     useEffect(()=>{
         getMovieData(movieId);
     },[])
@@ -28,9 +27,9 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
             console.log('API Response:', response.data); // Log the API response
             console.log("review log")
 
-            const updatedReviews = [...reviews, {body:rev.valueOf}];
+            const updatedReviews = [...reviews, {body:rev.value}];
     
-            rev.current.value = "";
+            rev.value = "";
     
             setReviews(updatedReviews);
         }
@@ -71,7 +70,7 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
                     reviews?.map((r) => {
                         console.log('Review Body:', r.body);
                         return(
-                            <div>{r.body}
+                            <div>
                             <>
                                 <Row>
                                     <Col>{r.body} </Col>

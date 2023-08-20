@@ -14,16 +14,15 @@ function App() {
   const [movies, setMovies] = useState();
   const [movieDetail, setMovieDetail] = useState();
   const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    getMovies();
+  },[])
 
   const getMovies = async () =>{
-    
     try
     {
-
       const response = await api.get("/api/v1/movies");
-
       setMovies(response.data);
-
     } 
     catch(err)
     {
@@ -32,29 +31,21 @@ function App() {
   }
 
   const getMovieData = async (movieId) => {
-     
     try 
     {
         const response = await api.get(`/api/v1/movies/${movieId}`);
-
         const singleMovie = response.data;
-
+        console.log("single movie:", singleMovie);
         setMovieDetail(singleMovie);
-
-        setReviews(singleMovie.reviews);
-        
-
+        setReviews(singleMovie.reviewIds);
     } 
     catch (error) 
     {
       console.error(error);
     }
-
   }
 
-  useEffect(() => {
-    getMovies();
-  },[])
+  
 
   return (
     <div className="App">
